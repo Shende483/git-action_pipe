@@ -1,0 +1,40 @@
+name: 🚀 Auto Deploy to Local Machine
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: 🔁 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📁 Install frontend dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: 🚀 Start frontend (dev:host)
+        working-directory: ./frontend
+        run: |
+          pkill -f "npm run dev:host" || true
+          nohup npm run dev:host > frontend.log 2>&1 &
+
+      - name: 📁 Install backend dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: 🚀 Start backend (dev:start)
+        working-directory: ./backend
+        run: |
+          pkill -f "npm run dev:start" || true
+          nohup npm run dev:start > backend.log 2>&1 &
+
