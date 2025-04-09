@@ -19,21 +19,21 @@ jobs:
           node-version: 18
 
       - name: 📁 Install frontend dependencies
-        working-directory: ./frontend
+        working-directory:  ./Risk-defender/frontend
         run: npm install
 
       - name: 🚀 Start frontend (dev:host)
-        working-directory: ./frontend
+        working-directory: ./Risk-defender/frontend
         run: |
           pkill -f "npm run dev:host" || true
           nohup npm run dev:host > frontend.log 2>&1 &
 
       - name: 📁 Install backend dependencies
-        working-directory: ./backend
+        working-directory: ./Risk-defender/backend
         run: npm install
 
       - name: 🚀 Start backend (dev:start)
-        working-directory: ./backend
+        working-directory: ./Risk-defender/backend
         run: |
           pkill -f "npm run dev:start" || true
           nohup npm run dev:start > backend.log 2>&1 &
