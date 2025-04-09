@@ -1,3 +1,13 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+# Ignore node_modules, build artifacts and others
+node_modules/
+dist/
+build/
+*.log
+**/node_modules/
+**/dist/
+**/build/
+
+
